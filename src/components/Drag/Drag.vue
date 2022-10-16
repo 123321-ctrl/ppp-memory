@@ -10,7 +10,14 @@
         <template #item="{ element }">
           <div class="item">
             {{ element.name }}
+            <span class="time">{{
+              new Date(element.time).toLocaleString()
+            }}</span>
             <div>{{ "⚪" + element.details }}</div>
+            <i
+              @click="deleteItem('todo', element)"
+              class="icon iconfont icon-shanchu deleteicon"
+            ></i>
           </div>
         </template>
       </draggable>
@@ -23,7 +30,14 @@
         <template #item="{ element }">
           <div class="item">
             {{ element.name }}
+            <span class="time">{{
+              new Date(element.time).toLocaleString()
+            }}</span>
             <div>{{ "⚪" + element.details }}</div>
+            <i
+              @click="deleteItem('inpro', element)"
+              class="icon iconfont icon-shanchu deleteicon"
+            ></i>
           </div>
         </template>
       </draggable>
@@ -36,7 +50,14 @@
         <template #item="{ element }">
           <div class="item">
             {{ element.name }}
+            <span class="time">{{
+              new Date(element.time).toLocaleString()
+            }}</span>
             <div>{{ "⚪" + element.details }}</div>
+            <i
+              @click="deleteItem('completed', element)"
+              class="icon iconfont icon-shanchu deleteicon"
+            ></i>
           </div>
         </template>
       </draggable>
@@ -59,18 +80,9 @@
       </span>
     </template>
   </el-dialog>
-  <button @click="show"></button>
 </template>
   <script>
-import {
-  defineComponent,
-  ref,
-  reactive,
-  toRefs,
-  watch,
-  computed,
-  onMounted,
-} from "vue";
+import { defineComponent, ref, reactive, toRefs, watch } from "vue";
 // 引入vuedraggable
 import draggable from "vuedraggable";
 
@@ -90,14 +102,6 @@ export default defineComponent({
       inProgressList,
       completedList,
     });
-
-    // const localEvents = computed(()=>{
-    //   const data = localStorage.getItem(currentID.value)
-    //   if(data === null){
-    //     return {}
-    //   }
-    //   return JSON.parse(data)
-    // })
 
     watch(curEvent, (newVal) => {
       // console.log(newVal)
@@ -124,9 +128,7 @@ export default defineComponent({
       name: "",
       details: "",
     });
-    // onMounted(()=>{
-    //   console.log("@@", localEvents.value.inProgressList)
-    // })
+
     return {
       todoList,
       inProgressList,
@@ -148,16 +150,19 @@ export default defineComponent({
       this.dialogFormVisible = false;
       if (this.curMsg === "todoList") {
         this.todoList.push({
+          time: new Date().getTime(),
           name: this.form.name,
           details: this.form.details,
         });
       } else if (this.curMsg === "inProgressList") {
         this.inProgressList.push({
+          time: new Date().getTime(),
           name: this.form.name,
           details: this.form.details,
         });
       } else {
         this.completedList.push({
+          time: new Date().getTime(),
           name: this.form.name,
           details: this.form.details,
         });
@@ -167,6 +172,28 @@ export default defineComponent({
     show() {
       console.log(this.currentID);
       console.log(this.curEvent);
+    },
+    deleteItem(msg, ele) {
+      console.log(msg, ele);
+      if(msg === 'todo'){
+        this.todoList.forEach((item,index) => {
+          if(item.time === ele.time){
+            this.todoList.splice(index,1)
+          }
+        });
+      }else if(msg === 'inpro'){
+        this.inProgressList.forEach((item,index) => {
+          if(item.time === ele.time){
+            this.inProgressList.splice(index,1)
+          }
+        });
+      }else{
+        this.completedList.forEach((item,index) => {
+          if(item.time === ele.time){
+            this.completedList.splice(index,1)
+          }
+        });
+      }
     },
   },
 });
@@ -205,9 +232,23 @@ button {
 }
 
 .item {
+  position: relative;
   margin: 10px;
   padding: 10px;
   border-radius: 12px;
   background: #ffffff;
+}
+.deleteicon {
+  position: absolute;
+  top: 39px;
+  right: 15px;
+  color: red;
+  font-size: 20px;
+}
+.time {
+  position: absolute;
+  left: 70px;
+  top: 15px;
+  font-size: 1px;
 }
 </style>

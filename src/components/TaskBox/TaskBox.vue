@@ -1,19 +1,26 @@
 <script setup>
 import { ref } from "vue";
-import Drag from '../Drag/Drag.vue'
-import {store} from '../../store'
+import Drag from "../Drag/Drag.vue";
+import weather from "../weatherCom/weather.vue";
+import { store } from "../../store";
 
 </script>
         
 <template>
   <div>
     <header>
-      <h1>{{store.currentTitle}}</h1>
-      <button v-show="!(store.currentTitle === 'ALL Tasks 可以放天气预报')">remove this Event</button>
-      <div v-show="!(store.currentTitle === 'ALL Tasks 可以放天气预报')">
-        <Drag :currentID="store.currentID"></Drag>
-      </div>
+      <h1>{{ store.currentTitle }}</h1>
     </header>
+    <div>
+      <div v-show="store.currentTitle === 'ALL Tasks'">
+        <weather></weather>
+      </div>
+      <div v-show="!(store.currentTitle === 'ALL Tasks')">
+        <div>
+          <Drag :currentID="store.currentID"></Drag>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
         

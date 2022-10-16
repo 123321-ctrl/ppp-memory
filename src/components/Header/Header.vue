@@ -5,16 +5,17 @@ const drawer = ref(false);
         
 <template>
   <div class="header">
-    <span class="icon iconfont icon-rili rili" @click="drawer = true"></span>
+    <span class="icon iconfont icon-rili" @click="drawer = true"></span>
     <span class="icon iconfont icon-tianqiyubao"></span>
-    <span class="icon iconfont icon-denglu"></span>
+    <span class="icon iconfont icon-denglu denglu"></span>
+
     <div>
       <el-drawer
         v-model="drawer"
         title="I am the title"
         :with-header="false"
         direction="rtl"
-        size="50%"
+        size="40%"
       >
         <el-calendar>
           <template #date-cell="{ data }">
@@ -33,9 +34,16 @@ const drawer = ref(false);
 .header {
   width: 100%;
 }
-.rili {
+.icon {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 28px;
   width: 50px;
-  background-color: aqua;
+}
+.denglu{
+  float:right;
 }
 .is-selected {
   color: #1989fa;
