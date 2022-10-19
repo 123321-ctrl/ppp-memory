@@ -63,7 +63,10 @@ function getposition() {
         {{ location }}
         <i @click="getposition" class="icon iconfont icon-dingwei dingwei"> </i>
       </div>
-      <div class="time">{{ Ftime }} 更新</div>
+      <div class="time">
+        <span>{{ Ftime}}</span>
+      <i class="icon iconfont icon-shuaxin"></i>
+      </div>
     </div>
     <div class="temp">{{ temp }}℃</div>
     <div class="right">
@@ -83,6 +86,7 @@ function getposition() {
   box-shadow: inset 0 0 3px hsl(0deg 0% 39% / 30%),
     inset 0 0 10px hsl(0deg 0% 39% / 30%);
   padding: 13px;
+  margin-right: 10px;
 }
 .desc {
   display: flex;
@@ -97,28 +101,30 @@ function getposition() {
   font-size: 16px;
 }
 .time {
+  flex: 1;
   width: 60%;
   height: 44px;
-  overflow: hidden;
-  font-size: 15px;
-  line-height: 44px;
+  font-size: 0.3rem;
+  /* line-height: 44px; */
 }
 .temp {
-  font-size: 85px;
+  font-size: 3.25rem;
   font-weight: 700;
 }
 .right {
   position: absolute;
-  top: 37px;
+  top: 48px;
   right: 18px;
 }
 .right > .icon {
-  font-size: 90px;
+  font-size: 2.5rem;
   color: orange;
 }
 .text {
+  font-size: 0.5rem;
+  color: orange;
   position: absolute;
-  bottom: -18px;
-  left: 34px;
+  bottom: -0.5rem;
+  left: 17px;
 }
 </style>

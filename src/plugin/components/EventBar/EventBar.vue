@@ -1,5 +1,5 @@
 <script setup>
-import { ElMessage } from 'element-plus'
+import { ElMessage } from "element-plus";
 import { ref, computed, onMounted } from "vue";
 import { store } from "../../store";
 
@@ -18,16 +18,16 @@ onMounted(() => {
   titles.value = localTitles.value;
 });
 
-function toAllTask(){
+function toAllTask() {
   store.currentID = 0;
-  store.currentTitle = 'ALL Tasks';
+  store.currentTitle = "ALL Tasks";
 }
 function addEvent() {
   // console.log(titles.value);
   const title = prompt("Enter the Title:");
-  if(title.length === 0){
-    ElMessage.error('不能为空哦')
-    return
+  if (title.length === 0) {
+    ElMessage.error("不能为空哦");
+    return;
   }
   titles.value.push({
     id: new Date().getTime(),
@@ -44,17 +44,17 @@ function currentEvent(id, index) {
   store.currentID = curevent.value.id;
   store.currentTitle = curevent.value.title;
 }
-function deleteItem(index,id){
-  titles.value.splice(index,1)
+function deleteItem(index, id) {
+  titles.value.splice(index, 1);
   localStorage.setItem("title", JSON.stringify(titles.value));
-  localStorage.removeItem(id)
+  localStorage.removeItem(id);
 }
 </script>
     
 <template>
   <div class="eventBar">
-    <h3>ppp-memory</h3>
-    <button class="btnclass" @click="addEvent" >+</button>
+    <h3 class="title">memory</h3>
+    <button class="btnclass" @click="addEvent">+</button>
     <div class="event-content">
       <div @click="toAllTask" class="allTask">ALL Task：</div>
       <div
@@ -63,8 +63,10 @@ function deleteItem(index,id){
         :class="['event-item', curIndex === index + 1 ? 'active' : '']"
         @click="currentEvent(item.id, index)"
       >
-        {{ item.title }}
-        <span @click="deleteItem(index,item.id)"><i class="icon iconfont icon-shanchu deleteicon"></i></span>
+        <span>{{ item.title }}</span>
+        <span @click="deleteItem(index, item.id)"
+          ><i class="icon iconfont icon-shanchu deleteicon"></i
+        ></span>
       </div>
     </div>
   </div>
@@ -78,9 +80,8 @@ function deleteItem(index,id){
   border-right: 1px solid gray;
   overflow-x: auto;
 }
-h3{
+.title {
   width: 80%;
-  overflow: hidden;
 }
 .btnclass {
   width: 80%;
@@ -93,22 +94,23 @@ h3{
   width: 80%;
   margin-top: 10px;
 }
-.allTask{
+.allTask {
   cursor: pointer;
 }
 .event-item {
   position: relative;
   height: 50px;
-  line-height: 50px;
   border: 1px solid gray;
   border-radius: 10px;
-  text-align: center;
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.deleteicon{
+.deleteicon {
   position: absolute;
-  right: 11px;
-  top: 0;
+  right: 0;
+  top: 16px;
   color: red;
 }
 .event-item:hover {

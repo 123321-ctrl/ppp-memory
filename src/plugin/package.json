@@ -1,0 +1,15 @@
+{
+  "name": "mymemory",
+  "version": "1.0.0",
+  "description": "一个简易的备忘录，附带天气查询和日历",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue3",
+    "vite"
+  ],
+  "author": "1447625819@qq.com",
+  "license": "ISC"
+}

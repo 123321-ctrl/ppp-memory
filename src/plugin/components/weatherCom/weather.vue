@@ -1,5 +1,9 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
+import weatherCard1 from './Comp/weatherCard1.vue'
+import weatherCard2 from './Comp/weatherCard2.vue'
+import weatherCard3 from './Comp/weatherCard3.vue'
+import weatherChart from './Comp/weatherChart.vue'
 import {
   getNowData,
   get7DaysData,
@@ -42,28 +46,30 @@ function getnewData() {
 </script>
         
 <template>
-  <div class="left">
-    <div class="cards">
-      <weatherCard1
-        :temp="temp"
-        :time="time"
-        :text="text"
-        :icon="icon"
-      ></weatherCard1>
-      <weatherCard3 :getLifestyles="getLifestyles"></weatherCard3>
+  <div>
+    <div class="left">
+      <div class="cards">
+        <weatherCard1
+          :temp="temp"
+          :time="time"
+          :text="text"
+          :icon="icon"
+        ></weatherCard1>
+        <weatherCard3 :getLifestyles="getLifestyles"></weatherCard3>
+      </div>
+      <weatherChart :get24Hours="get24Hours"></weatherChart>
+      <weatherCard2 :get7Days="get7Days"></weatherCard2>
     </div>
-    <weatherChart :get24Hours="get24Hours"></weatherChart>
-    <weatherCard2 :get7Days="get7Days"></weatherCard2>
-  </div>
-  <div class="right">
-    <el-calendar>
-      <template #date-cell="{ data }">
-        <p :class="data.isSelected ? 'is-selected' : ''">
-          {{ data.day.split("-").slice(1).join("/") }}
-          {{ data.isSelected ? "✔️" : "" }}
-        </p>
-      </template>
-    </el-calendar>
+    <div class="right">
+      <el-calendar>
+        <template #date-cell="{ data }">
+          <p :class="data.isSelected ? 'is-selected' : ''">
+            {{ data.day.split("-").slice(1).join("/") }}
+            {{ data.isSelected ? "✔️" : "" }}
+          </p>
+        </template>
+      </el-calendar>
+    </div>
   </div>
 </template>
         

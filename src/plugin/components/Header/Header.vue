@@ -1,15 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 const drawer = ref(false);
+
 </script>
         
 <template>
   <div class="header">
+    {{ innerWidth }}
     <span class="icon iconfont icon-rili" @click="drawer = true"></span>
     <span class="icon iconfont icon-tianqiyubao"></span>
     <span class="icon iconfont icon-denglu denglu"></span>
 
-    <div>
+    <div class="drawer">
       <el-drawer
         v-model="drawer"
         title="I am the title"
@@ -35,15 +37,17 @@ const drawer = ref(false);
   width: 100%;
 }
 .icon {
-  display: inline-block;
-  height: 50px;
+  float: left;
   line-height: 50px;
   text-align: center;
   font-size: 28px;
   width: 50px;
 }
-.denglu{
-  float:right;
+.denglu {
+  float: right;
+}
+.el-calendar {
+  font-size: 0.3rem;
 }
 .is-selected {
   color: #1989fa;

@@ -1,70 +1,70 @@
 <template>
-  <div class="taskBox">
-    <div class="items toDo">
-      <!-- 
+  <div>
+    <div class="taskBox">
+      <div class="items toDo">
+        <!-- 
         注意需要加上group属性，才能在两个容器中进行拖拽
        -->
-      <h3>to do</h3>
-      <button @click="showDialog('todoList')">+</button>
-      <draggable v-model="todoList" item-key="id" group="course">
-        <template #item="{ element }">
-          <div class="item">
-            {{ element.name }}
-            <span class="time">{{
-              new Date(element.time).toLocaleString()
-            }}</span>
-            <div>{{ "⚪" + element.details }}</div>
-            <i
-              @click="deleteItem('todo', element)"
-              class="icon iconfont icon-shanchu deleteicon"
-            ></i>
-          </div>
-        </template>
-      </draggable>
-    </div>
+        <h3>to do</h3>
+        <button @click="showDialog('todoList')">+</button>
+        <draggable v-model="todoList" item-key="id" group="course">
+          <template #item="{ element }">
+            <div class="item">
+              {{ element.name }}
+              <span class="time">{{
+                new Date(element.time).toLocaleString()
+              }}</span>
+              <div>{{ "⚪" + element.details }}</div>
+              <i
+                @click="deleteItem('todo', element)"
+                class="icon iconfont icon-shanchu deleteicon"
+              ></i>
+            </div>
+          </template>
+        </draggable>
+      </div>
 
-    <div class="items inProgress">
-      <h3>in progress</h3>
-      <button @click="showDialog('inProgressList')">+</button>
-      <draggable v-model="inProgressList" item-key="id" group="course">
-        <template #item="{ element }">
-          <div class="item">
-            {{ element.name }}
-            <span class="time">{{
-              new Date(element.time).toLocaleString()
-            }}</span>
-            <div>{{ "⚪" + element.details }}</div>
-            <i
-              @click="deleteItem('inpro', element)"
-              class="icon iconfont icon-shanchu deleteicon"
-            ></i>
-          </div>
-        </template>
-      </draggable>
-    </div>
+      <div class="items inProgress">
+        <h3>in progress</h3>
+        <button @click="showDialog('inProgressList')">+</button>
+        <draggable v-model="inProgressList" item-key="id" group="course">
+          <template #item="{ element }">
+            <div class="item">
+              {{ element.name }}
+              <span class="time">{{
+                new Date(element.time).toLocaleString()
+              }}</span>
+              <div>{{ "⚪" + element.details }}</div>
+              <i
+                @click="deleteItem('inpro', element)"
+                class="icon iconfont icon-shanchu deleteicon"
+              ></i>
+            </div>
+          </template>
+        </draggable>
+      </div>
 
-    <div class="items completed">
-      <h3>completed</h3>
-      <button @click="showDialog('completedList')">+</button>
-      <draggable v-model="completedList" item-key="id" group="course">
-        <template #item="{ element }">
-          <div class="item">
-            {{ element.name }}
-            <span class="time">{{
-              new Date(element.time).toLocaleString()
-            }}</span>
-            <div>{{ "⚪" + element.details }}</div>
-            <i
-              @click="deleteItem('completed', element)"
-              class="icon iconfont icon-shanchu deleteicon"
-            ></i>
-          </div>
-        </template>
-      </draggable>
+      <div class="items completed">
+        <h3>completed</h3>
+        <button @click="showDialog('completedList')">+</button>
+        <draggable v-model="completedList" item-key="id" group="course">
+          <template #item="{ element }">
+            <div class="item">
+              {{ element.name }}
+              <span class="time">{{
+                new Date(element.time).toLocaleString()
+              }}</span>
+              <div>{{ "⚪" + element.details }}</div>
+              <i
+                @click="deleteItem('completed', element)"
+                class="icon iconfont icon-shanchu deleteicon"
+              ></i>
+            </div>
+          </template>
+        </draggable>
+      </div>
     </div>
-  </div>
-
-  <el-dialog v-model="dialogFormVisible" title="新增事件">
+    <el-dialog v-model="dialogFormVisible" title="新增事件">
     <el-form :model="form">
       <el-form-item label="task name" :label-width="formLabelWidth">
         <el-input v-model="form.name" autocomplete="off" />
@@ -80,6 +80,9 @@
       </span>
     </template>
   </el-dialog>
+  </div>
+
+  
 </template>
   <script>
 import { defineComponent, ref, reactive, toRefs, watch } from "vue";
@@ -175,22 +178,22 @@ export default defineComponent({
     },
     deleteItem(msg, ele) {
       console.log(msg, ele);
-      if(msg === 'todo'){
-        this.todoList.forEach((item,index) => {
-          if(item.time === ele.time){
-            this.todoList.splice(index,1)
+      if (msg === "todo") {
+        this.todoList.forEach((item, index) => {
+          if (item.time === ele.time) {
+            this.todoList.splice(index, 1);
           }
         });
-      }else if(msg === 'inpro'){
-        this.inProgressList.forEach((item,index) => {
-          if(item.time === ele.time){
-            this.inProgressList.splice(index,1)
+      } else if (msg === "inpro") {
+        this.inProgressList.forEach((item, index) => {
+          if (item.time === ele.time) {
+            this.inProgressList.splice(index, 1);
           }
         });
-      }else{
-        this.completedList.forEach((item,index) => {
-          if(item.time === ele.time){
-            this.completedList.splice(index,1)
+      } else {
+        this.completedList.forEach((item, index) => {
+          if (item.time === ele.time) {
+            this.completedList.splice(index, 1);
           }
         });
       }
@@ -200,6 +203,7 @@ export default defineComponent({
 </script>
   <style scoped>
 .taskBox {
+  width: 90%;
   display: flex;
   justify-content: space-around;
 }

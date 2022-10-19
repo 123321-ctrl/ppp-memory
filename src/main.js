@@ -1,7 +1,17 @@
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
 import './style.css'
 import App from './App.vue'
-import './assets/font/iconfont.css'
+import './plugin/font/iconfont.css'
 import 'element-plus/theme-chalk/el-message.css'
 
-createApp(App).mount('#app')
+import mymemory from './plugin/index'
+
+const app = createApp({
+    render: () => h(App),
+})
+
+app.use(mymemory)
+
+app.mount('#app')
+
+// createApp(App).mount('#app')
